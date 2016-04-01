@@ -10,6 +10,9 @@
 /* jshint -W097 */
 'use strict';
 
+var percentNonWordCharactersAllowed = .25;
+var ratioUppercaseToLowercase = .25;
+
 var filters = [ 'Robin Autovoter' ]
 
 function isReal(s) {
@@ -22,13 +25,13 @@ function isReal(s) {
   var nonWord = lowerStr.length;
 
   // if the ratio of uppercase to lowercase letters is greater that .25, fail the message
-  if ((upper / lower) > 0.25) {
+  if ((upper / lower) > ratioUppercaseToLowercase) {
     console.log(upper + ' / ' + lower + ' / ' + nonWord + ' ratio is ' + upper / lower);
     return false;
   }
 
   // if the percentage of non-word characters is larger than 25% then fail the message
-  if ((nonWord / s.length) > .25) {
+  if ((nonWord / s.length) > percentNonWordCharactersAllowed) {
     console.log(upper + ' / ' + lower + ' / ' + nonWord + ' percentage is ' + nonWord / s.length);
     return false;
   }
