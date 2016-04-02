@@ -54,7 +54,7 @@ function isReal(s) {
 
 $("#robinChatMessageList").bind("DOMSubtreeModified", function() {
   var msgs = $('.robin-message--message');
-  console.log('number of msgs: ' + msgs.length + '/' + msgsDeleted);
+//  console.log('number of msgs: ' + msgs.length + '/' + msgsDeleted);
 
   for(var i = 0; i < msgs.length; i++) {
     
@@ -66,10 +66,14 @@ $("#robinChatMessageList").bind("DOMSubtreeModified", function() {
 });
 
 setTimeout(function(){
-  $("#robinSendMessage > input[type='text']").val("/vote " + vote);
-  $("#robinSendMessage > input[type='submit']").click();
-
-    setTimeout(function(){
-        window.location.reload();
-    }, 300000);
+  if (!$(document.activeElement).is('input')) {
+    $("#robinSendMessage > input[type='text']").val("/vote " + vote);
+    $("#robinSendMessage > input[type='submit']").click();
+  } else {
+    console.log('input has focus');
+  }
 }, 5000);
+
+setTimeout(function(){
+    window.location.reload();
+}, 300000);
