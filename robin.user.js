@@ -13,7 +13,9 @@
 var percentNonWordCharactersAllowed = .25;
 var ratioUppercaseToLowercase = .25;
 
-var filters = [ 'Robin Autovoter', 'nigger' ]
+var filters = [ 'Robin Autovoter', 'nigger', 'Faggot', 'faggot' ]
+
+var msgsDeleted = 0;
 
 function isReal(s) {
   var upperStr = s.replace(/[A-Z]/g, '')
@@ -26,20 +28,19 @@ function isReal(s) {
 
   // if the ratio of uppercase to lowercase letters is greater that .25, fail the message
   if ((upper / lower) > ratioUppercaseToLowercase) {
-    console.log(upper + ' / ' + lower + ' / ' + nonWord + ' ratio is ' + upper / lower);
+//    console.log(upper + ' / ' + lower + ' / ' + nonWord + ' ratio is ' + upper / lower);
     return false;
   }
 
   // if the percentage of non-word characters is larger than 25% then fail the message
   if ((nonWord / s.length) > percentNonWordCharactersAllowed) {
-    console.log(upper + ' / ' + lower + ' / ' + nonWord + ' percentage is ' + nonWord / s.length);
+//    console.log(upper + ' / ' + lower + ' / ' + nonWord + ' percentage is ' + nonWord / s.length);
     return false;
   }
   
   for (var i = 0; i < filters.length; i++) {
     if (s.indexOf(filters[i]) >=0 ) {
       // the string contains one of the filter words
-      console.log(' hit filter word ');
       
       return false
     }
@@ -51,12 +52,13 @@ function isReal(s) {
 
 $("#robinChatMessageList").bind("DOMSubtreeModified", function() {
   var msgs = $('.robin-message--message');
+  console.log('number of msgs: ' + msgs.length + '/' + msgsDeleted);
 
   for(var i = 0; i < msgs.length; i++) {
     
     if (!isReal(msgs[i].innerText)) {
-      console.log(msgs[i].innerText);
-      $(msgs[i]).parent().hide();
+      msgsDeleted++;
+      $(msgs[i]).parent().remove();
     }
   }
 });
