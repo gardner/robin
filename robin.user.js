@@ -13,7 +13,7 @@
 var percentNonWordCharactersAllowed = .25;
 var ratioUppercaseToLowercase = .25;
 
-var filters = [ 'Robin Autovoter', 'nigger', 'Faggot', 'faggot' ]
+var filters = [ 'Robin Autovoter', 'nigger', 'Faggot', 'faggot', 'com.crackedglass.polydodge.droid' ]
 
 var msgsDeleted = 0;
 
