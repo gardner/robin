@@ -10,10 +10,12 @@
 /* jshint -W097 */
 'use strict';
 
+var vote = 'grow'   // you can change 'grow' to 'abandon' or 'stay' 
+
 var percentNonWordCharactersAllowed = .25;
 var ratioUppercaseToLowercase = .25;
 
-var filters = [ 'Robin Autovoter', 'nigger', 'Faggot', 'faggot', 'com.crackedglass.polydodge.droid' ]
+var filters = [ 'Robin Autovoter', 'nigger', 'Faggot', 'faggot', 'com.crackedglass.polydodge.droid', 'Autovote' ]
 
 var msgsDeleted = 0;
 
@@ -64,7 +66,7 @@ $("#robinChatMessageList").bind("DOMSubtreeModified", function() {
 });
 
 setTimeout(function(){
-  $("#robinSendMessage > input[type='text']").val("/vote grow");
+  $("#robinSendMessage > input[type='text']").val("/vote " + vote);
   $("#robinSendMessage > input[type='submit']").click();
 
     setTimeout(function(){
