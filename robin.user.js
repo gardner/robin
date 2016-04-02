@@ -11,7 +11,6 @@
 'use strict';
 
 var vote = 'grow'; // you can change 'grow' to 'abandon' or 'stay' or false
-vote = false;
 
 var percentNonWordCharactersAllowed = .25;
 var ratioUppercaseToLowercase = .25;
