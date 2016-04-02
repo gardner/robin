@@ -11,7 +11,6 @@
 'use strict';
 
 var vote = 'grow'; // you can change 'grow' to 'abandon' or 'stay' or false
-vote = false;
 
 var percentNonWordCharactersAllowed = .25;
 var ratioUppercaseToLowercase = .25;
@@ -70,10 +69,20 @@ $("#robinChatMessageList").bind("DOMSubtreeModified", function() {
 });
 
 setTimeout(function(){
-  if (!$(document.activeElement).is('input') && (vote)) {
+  // only vote if there is no text in the input box and the user has voting turned on
+  if ((!$('.c-form-control.text-counter-input').val()) && (vote)) {
     $("#robinSendMessage > input[type='text']").val("/vote " + vote);
     $("#robinSendMessage > input[type='submit']").click();
   } else {
+    if ('grow' == vote)
+      $('.robin--vote-class--increase').click()
+
+    if ('abandon' == vote)
+      $('.robin--vote-class--abandon').click()
+
+    if ('stay' == vote)
+      $('.robin--vote-class--continue').click()
+
     console.log('input has focus');
   }
 }, 5000);
