@@ -13,7 +13,7 @@
 var percentNonWordCharactersAllowed = .25;
 var ratioUppercaseToLowercase = .25;
 
-var filters = [ 'Robin Autovoter' ]
+var filters = [ 'Robin Autovoter', 'nigger' ]
 
 function isReal(s) {
   var upperStr = s.replace(/[A-Z]/g, '')

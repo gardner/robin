@@ -4,3 +4,5 @@ This anti-spam robot works differently than the others currently available. It l
 You can tweak the allowed ratios of uppercase to lowercase and percentage of non-word characters.
 
 
+# install
+You need to install Tampermonkey 
