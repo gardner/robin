@@ -10,15 +10,17 @@
 /* jshint -W097 */
 'use strict';
 
-var vote = 'grow'   // you can change 'grow' to 'abandon' or 'stay' 
+var vote = 'grow'; // you can change 'grow' to 'abandon' or 'stay' or false
+vote = false;
 
 var percentNonWordCharactersAllowed = .25;
 var ratioUppercaseToLowercase = .25;
 
-var filters = [ 'Robin Autovoter', 'nigger', 'Faggot', 'faggot', 'com.crackedglass.polydodge.droid', 'Autovote' ]
+var filters = [ 'Robin Autovoter', 'nigger', 'Faggot', 'faggot', 'com.crackedglass.polydodge.droid', 'Autovote' ];
 
 var msgsDeleted = 0;
 
+// This is the function that checks for ALL CAPS MESSAGES and poop emojis
 function isReal(s) {
   var upperStr = s.replace(/[A-Z]/g, '')
   var upper = s.length - upperStr.length;
@@ -57,16 +59,18 @@ $("#robinChatMessageList").bind("DOMSubtreeModified", function() {
 //  console.log('number of msgs: ' + msgs.length + '/' + msgsDeleted);
 
   for(var i = 0; i < msgs.length; i++) {
-    
     if (!isReal(msgs[i].innerText)) {
-      msgsDeleted++;
-      $(msgs[i]).parent().remove();
+      // allow the system messages to come through
+      if (!$(msgs[i]).parent().hasClass('robin--user-class--system')) {
+        msgsDeleted++;
+        $(msgs[i]).parent().remove();
+      }
     }
   }
 });
 
 setTimeout(function(){
-  if (!$(document.activeElement).is('input')) {
+  if (!$(document.activeElement).is('input') && (vote)) {
     $("#robinSendMessage > input[type='text']").val("/vote " + vote);
     $("#robinSendMessage > input[type='submit']").click();
   } else {
