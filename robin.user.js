@@ -73,3 +73,10 @@ setTimeout(function(){
         window.location.reload();
     }, 300000);
 }, 5000);
+
+// reap old messages
+setInterval(function(){
+	l = document.getElementById('robinChatMessageList')
+	while(l.childNodes.length > 1000)
+		l.firstChild.remove()
+}, 1000)
